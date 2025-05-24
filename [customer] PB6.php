@@ -29,7 +29,6 @@ function addCustomer($name, $item, $mobile)
 function deleteCustomer($id) 
 {
     global $conn;
-    //$id = mysqli_real_escape_string($conn, $id);
     $sql = "DELETE FROM customers WHERE customer_id = $id";
     if ($conn->query($sql)) 
     {
@@ -76,7 +75,7 @@ function sortById()
     } 
     else 
     {
-         echo "No records found.";
+    echo "No records found.";
     }
 }
 function displayRecords() 
@@ -86,7 +85,7 @@ function displayRecords()
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
     {
-        while ($row = $result->fetch_assoc()) 
+    while ($row = $result->fetch_assoc()) 
         {
             echo "Customer ID: " . $row["customer_id"] . ", ";
             echo "Customer Name: " . $row["customer_name"] . ", ";
@@ -112,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 <html>
 <head>
-    <title>Customer Information Management</title>
+<title>Customer Information Management</title>
 </head>
 <body>
 <button onclick="document.getElementById('add_form').style.display='block'">Add Customer Information</button>
@@ -124,31 +123,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <input type="submit" name="add_customer" value="Add Customer">
     </form>
 </div>
-<!-- Delete Customer Records Form -->
 <button onclick="document.getElementById('delete_form').style.display='block'">Delete Customer Records</button>
 <div id="delete_form" style="display:none;">
     <form method="post">
         Customer ID: <input type="text" name="customer_id" required><br>
         <input type="submit" name="delete_record" value="Delete Record">
-    </form>
+         </form>
 </div>
-<!-- Search for Particular Entries Form -->
 <button onclick="document.getElementById('search_form').style.display='block'">Search for Particular Entries</button>
 <div id="search_form" style="display:none;">
-    <form method="post">
-        Customer ID: <input type="text" name="customer_id" required><br>
+    <form method="post">Customer ID: <input type="text" name="customer_id" required><br>
         <input type="submit" name="search_entry" value="Search">
     </form>
 </div>
-<!-- Sort Database Based on Customer Id -->
 <button onclick="document.getElementById('sort_btn').style.display='block'">Sort Database Based on Customer Id</button>
 <div id="sort_btn" style="display:none;">
 <?php sortById(); ?>
 </div>
-<!-- Display Complete Set of Records -->
 <button onclick="document.getElementById('display_records').style.display='block'">Display Complete Set of Records</button>
 <div id="display_records" style="display:none;">
-    <?php displayRecords(); ?>
+<?php displayRecords(); ?>
 </div>
 </body>
 </html>
